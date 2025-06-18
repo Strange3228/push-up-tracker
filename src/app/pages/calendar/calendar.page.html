@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Calendar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Month Navigation -->
+  <ion-card>
+    <ion-card-content class="month-navigation">
+      <ion-button fill="clear" (click)="previousMonth()">
+        <ion-icon name="chevron-back"></ion-icon>
+      </ion-button>
+      <h2>{{ getMonthName() }} {{ currentYear }}</h2>
+      <ion-button fill="clear" (click)="nextMonth()">
+        <ion-icon name="chevron-forward"></ion-icon>
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Calendar Grid -->
+  <ion-card>
+    <ion-card-content>
+      <div class="calendar-grid">
+        <!-- Weekday Headers -->
+        <div class="weekday-header" *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']">
+          {{ day }}
+        </div>
+
+        <!-- Empty cells for days before the first of the month -->
+        <div class="calendar-day empty" *ngFor="let _ of [].constructor(getFirstDayOfMonth())"></div>
+
+        <!-- Calendar Days -->
+        <div
+          class="calendar-day"
+          [class.has-entry]="hasEntry(day)"
+          [class.today]="isToday(day)"
+          [class.selected]="isSelectedDate(day)"
+          *ngFor="let day of getDaysInMonth()"
+          (click)="selectDate(day)"
+        >
+          <span class="day-number">{{ day }}</span>
+          <span class="entry-count" *ngIf="hasEntry(day)">
+            {{ getEntryCount(day) }}
+          </span>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Selected Date Details -->
+  <ion-card *ngIf="selectedDate">
+    <ion-card-header>
+      <ion-card-title>{{ selectedDate | date:'MMMM d, y' }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let entry of selectedDateEntries">
+          <ion-label>
+            <h2>{{ entry.count }} push-ups</h2>
+            <p>{{ entry.createdAt | date:'shortTime' }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item *ngIf="selectedDateEntries.length === 0">
+          <ion-label>
+            <p>No entries for this day</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content> 

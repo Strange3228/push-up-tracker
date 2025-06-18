@@ -1,0 +1,146 @@
+.month-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background-color: var(--ion-color-primary);
+  
+  h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+  }
+
+  ion-button {
+    --color: white;
+  }
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 4px;
+  padding: 0.5rem;
+  background-color: white;
+  max-width: 420px;
+  margin: 0 auto;
+  min-height: 300px;
+}
+
+.weekday-header {
+  text-align: center;
+  font-weight: 600;
+  color: var(--ion-color-primary);
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.calendar-day {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 0.25rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  background-color: var(--ion-color-light);
+  color: var(--ion-color-primary);
+  
+  &:hover {
+    background-color: var(--ion-color-secondary);
+    color: white;
+  }
+  
+  &.empty {
+    cursor: default;
+    background-color: transparent;
+    &:hover {
+      background-color: transparent;
+    }
+  }
+  
+  &.has-entry {
+    background-color: var(--ion-color-tertiary);
+    color: var(--ion-color-primary);
+    font-weight: 600;
+  }
+  
+  &.today {
+    border: 2px solid var(--ion-color-primary);
+  }
+  
+  &.selected {
+    background-color: var(--ion-color-primary);
+    color: white;
+  }
+  
+  .day-number {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  .entry-count {
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+  }
+}
+
+ion-card {
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(54, 116, 181, 0.1);
+  background-color: white;
+  
+  ion-card-header {
+    background-color: var(--ion-color-primary);
+    
+    ion-card-title {
+      color: white;
+    }
+  }
+}
+
+ion-card-header {
+  padding: 1rem;
+  
+  ion-card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+}
+
+ion-list {
+  background: transparent;
+}
+
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --background: transparent;
+  --color: var(--ion-color-primary);
+  
+  h2 {
+    color: var(--ion-color-primary);
+    font-weight: 600;
+  }
+  
+  p {
+    color: var(--ion-color-medium);
+  }
+}
+
+ion-content {
+  --background: var(--ion-color-light);
+}
+
+ion-toolbar {
+  --background: var(--ion-color-primary);
+  --color: white;
+} 
