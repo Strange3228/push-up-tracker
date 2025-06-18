@@ -1,0 +1,7 @@
+{
+  "name": "push-ups-tracker",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
