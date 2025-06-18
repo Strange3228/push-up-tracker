@@ -75,4 +75,11 @@ export class PushUpService {
       return entryDate.getFullYear() === year && entryDate.getMonth() === month;
     });
   }
+
+  async removeEntry(id: string): Promise<void> {
+    const entries = await this.storage?.get(ENTRIES_KEY) || [];
+    const updatedEntries = entries.filter((entry: PushUpEntry) => entry.id !== id);
+    await this.storage?.set(ENTRIES_KEY, updatedEntries);
+    this.entriesSubject.next(updatedEntries);
+  }
 }

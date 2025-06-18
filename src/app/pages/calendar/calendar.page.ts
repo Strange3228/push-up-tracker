@@ -94,4 +94,32 @@ export class CalendarPage {
   isSelectedDate(day: number): boolean {
     return this.selectedDate === this.getDateString(day);
   }
+
+  async confirmRemoveEntry(entry: PushUpEntry) {
+    const alert = document.createElement('ion-alert');
+    alert.header = 'Delete Entry';
+    alert.message = `Are you sure you want to delete ${entry.count} push-ups on ${entry.date}?`;
+    alert.buttons = [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+      },
+      {
+        text: 'Delete',
+        role: 'destructive',
+        handler: async () => {
+          await this.pushUpService.removeEntry(entry.id);
+          await this.loadMonthData();
+          if (this.selectedDate) {
+            this.selectedDateEntries = this.entries.filter(e => e.date === this.selectedDate);
+          }
+          // Optionally show a toast
+        }
+      }
+    ];
+    document.body.appendChild(alert);
+    await alert.present();
+    await alert.onDidDismiss();
+    document.body.removeChild(alert);
+  }
 }

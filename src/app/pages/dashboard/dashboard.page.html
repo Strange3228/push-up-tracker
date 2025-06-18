@@ -49,6 +49,9 @@
             <h2>{{ entry.date | date:'MMM d, y' }}</h2>
             <p>{{ entry.count }} push-ups</p>
           </ion-label>
+          <ion-button fill="clear" color="danger" slot="end" (click)="confirmRemoveEntry(entry)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
         </ion-item>
         <ion-item *ngIf="recentEntries.length === 0">
           <ion-label>

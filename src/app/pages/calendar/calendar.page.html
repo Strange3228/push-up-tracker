@@ -63,6 +63,9 @@
             <h2>{{ entry.count }} push-ups</h2>
             <p>{{ entry.createdAt | date:'shortTime' }}</p>
           </ion-label>
+          <ion-button fill="clear" color="danger" slot="end" (click)="confirmRemoveEntry(entry)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
         </ion-item>
         <ion-item *ngIf="selectedDateEntries.length === 0">
           <ion-label>

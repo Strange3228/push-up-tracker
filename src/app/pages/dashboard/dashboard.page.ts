@@ -70,4 +70,35 @@ export class DashboardPage {
       this.pushUpCount--;
     }
   }
+
+  async confirmRemoveEntry(entry: PushUpEntry) {
+    const alert = document.createElement('ion-alert');
+    alert.header = 'Delete Entry';
+    alert.message = `Are you sure you want to delete ${entry.count} push-ups on ${entry.date}?`;
+    alert.buttons = [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+      },
+      {
+        text: 'Delete',
+        role: 'destructive',
+        handler: async () => {
+          await this.pushUpService.removeEntry(entry.id);
+          await this.loadData();
+          const toast = await this.toastController.create({
+            message: 'Entry deleted',
+            duration: 1500,
+            color: 'danger',
+            position: 'bottom'
+          });
+          toast.present();
+        }
+      }
+    ];
+    document.body.appendChild(alert);
+    await alert.present();
+    await alert.onDidDismiss();
+    document.body.removeChild(alert);
+  }
 }
