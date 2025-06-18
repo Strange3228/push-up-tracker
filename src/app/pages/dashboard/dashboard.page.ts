@@ -60,4 +60,14 @@ export class DashboardPage {
   navigateToCalendar() {
     this.router.navigate(['/calendar']);
   }
+
+  incrementPushUpCount() {
+    this.pushUpCount++;
+  }
+
+  decrementPushUpCount() {
+    if (this.pushUpCount > 1) {
+      this.pushUpCount--;
+    }
+  }
 }
